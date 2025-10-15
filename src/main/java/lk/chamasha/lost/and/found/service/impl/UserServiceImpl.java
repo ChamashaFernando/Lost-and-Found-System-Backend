@@ -111,6 +111,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse login(UserRequest userRequest) throws UserNotFoundException {
+        if(userRequest.getPassword() == null || userRequest.getPassword().isEmpty()){
+            throw new IllegalArgumentException("Password cannot be null or empty");
+        }
+
         User user = userRepository.findByEmail(userRequest.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("User not found with email: " + userRequest.getEmail()));
 
@@ -118,11 +122,11 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        // ✅ මෙතන location update කරන්න
+        // Update location if available
         if(userRequest.getLatitude() != null && userRequest.getLongitude() != null){
             user.setLatitude(userRequest.getLatitude());
             user.setLongitude(userRequest.getLongitude());
-            userRepository.save(user); // DB එකට save කරන්න
+            userRepository.save(user);
         }
 
         Map<String, Object> claims = generateClaims(user);

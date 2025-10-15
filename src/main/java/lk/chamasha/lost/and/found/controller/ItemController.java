@@ -7,8 +7,10 @@ import lk.chamasha.lost.and.found.exception.ItemNotFoundException;
 import lk.chamasha.lost.and.found.exception.UserNotFoundException;
 import lk.chamasha.lost.and.found.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,6 +20,8 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+
+
 
     @RolesAllowed({"ADMIN","STUDENT"})
     @PostMapping
