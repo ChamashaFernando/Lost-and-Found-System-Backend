@@ -81,7 +81,7 @@ public class ClaimRequestServiceImpl implements ClaimRequestService {
                         .description(claim.getItem().getDescription())
                         .category(claim.getItem().getCategory())
                         .status(claim.getItem().getStatus())
-                        .photoUrl(claim.getItem().getPhotoUrl())
+                        .imageUrl(claim.getItem().getImageUrl()) // ✅ change here
                         .location(claim.getItem().getLocation())
                         .date(claim.getItem().getDate())
                         .emergency(claim.getItem().isEmergency())

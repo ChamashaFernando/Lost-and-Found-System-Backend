@@ -1,5 +1,7 @@
 package lk.chamasha.lost.and.found.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.security.RolesAllowed;
 import lk.chamasha.lost.and.found.controller.request.ItemRequest;
 import lk.chamasha.lost.and.found.controller.response.ItemResponse;
@@ -21,13 +23,18 @@ public class ItemController {
 
     private final ItemService itemService;
 
+    // 🟢 Multipart support
+    @PostMapping(value = "/add", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    public ResponseEntity<ItemResponse> addItem(
+            @RequestPart("item") String itemJson,
+            @RequestPart(value = "image", required = false) MultipartFile image
+    ) throws JsonProcessingException,UserNotFoundException{
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        ItemRequest itemRequest = objectMapper.readValue(itemJson, ItemRequest.class);
 
-    @RolesAllowed({"ADMIN","STUDENT"})
-    @PostMapping
-    public ResponseEntity<ItemResponse> createItem(@RequestBody ItemRequest request) throws UserNotFoundException {
-        ItemResponse createdItem = itemService.createItem(request);
-        return ResponseEntity.ok(createdItem);
+        ItemResponse response = itemService.createItem(itemJson, image);
+        return ResponseEntity.ok(response);
     }
 
     @RolesAllowed({"ADMIN","STUDENT"})

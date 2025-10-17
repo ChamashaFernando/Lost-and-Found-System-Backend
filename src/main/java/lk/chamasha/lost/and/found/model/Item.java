@@ -29,7 +29,7 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemStatus status;
 
-    private String photoUrl;
+    private String imageUrl;
 
     private String location;
 
@@ -40,4 +40,9 @@ public class Item {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    // Convenience method for photo access
+    public String getPhotoUrl() {
+        return this.imageUrl;
+    }
 }

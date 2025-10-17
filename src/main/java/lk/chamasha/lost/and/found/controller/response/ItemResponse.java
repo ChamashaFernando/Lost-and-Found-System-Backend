@@ -18,7 +18,7 @@ public class ItemResponse {
     private String description;
     private String category;
     private ItemStatus status;
-    private String photoUrl;
+    private String imageUrl;
     private String location;
     private LocalDateTime date;
     private boolean emergency;
