@@ -146,10 +146,25 @@ public class ItemServiceImpl implements ItemService {
                         .fullName(user.getFullName())
                         .email(user.getEmail())
                         .role(user.getRole())
-                        .languagePreference(user.getLanguagePreference().name())
+                        .languagePreference(
+                                user.getLanguagePreference() != null
+                                        ? user.getLanguagePreference().name()
+                                        : "ENGLISH" // default language
+                        )
+
                         .reputationScore(user.getReputationScore())
                         .verified(user.isVerified())
                         .build())
                 .build();
     }
+
+    @Override
+    public List<ItemResponse> getAllItems() {
+        return itemRepository.findAll().stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
+
+
 }

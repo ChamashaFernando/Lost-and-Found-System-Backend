@@ -16,6 +16,7 @@ public interface ItemService {
     public List<ItemResponse> getItemsByUser(Long userId);
     public List<ItemResponse> searchItems(String category, String location, boolean emergency);
     public void deleteItem(Long id)throws ItemNotFoundException;
+    public List<ItemResponse> getAllItems();
 
 
 

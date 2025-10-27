@@ -113,7 +113,7 @@ public class User implements UserDetails {
     private UserRole role;
 
     @Enumerated(EnumType.STRING)
-    private LanguageType languagePreference;
+    private LanguageType languagePreference = LanguageType.ENGLISH;
 
     private int reputationScore;
 

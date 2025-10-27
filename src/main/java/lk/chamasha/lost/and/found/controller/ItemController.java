@@ -24,6 +24,7 @@ public class ItemController {
     private final ItemService itemService;
 
     // 🟢 Multipart support
+    @RolesAllowed({"ADMIN","STUDENT"})
     @PostMapping(value = "/add", consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<ItemResponse> addItem(
             @RequestPart("item") String itemJson,
@@ -68,4 +69,12 @@ public class ItemController {
         itemService.deleteItem(id);
         return ResponseEntity.noContent().build();
     }
+
+    // ItemController.java
+    @RolesAllowed({"ADMIN","STUDENT"})
+    @GetMapping
+    public List<ItemResponse> getAllItems() {
+        return itemService.getAllItems();
+    }
+
 }

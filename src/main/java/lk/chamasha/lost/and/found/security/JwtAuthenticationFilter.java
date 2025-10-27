@@ -102,4 +102,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         path.startsWith("/api/found")
         ));
     }
+
 }
+
+
+
+
+
+
+
