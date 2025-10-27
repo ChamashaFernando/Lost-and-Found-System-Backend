@@ -7,6 +7,7 @@ import lk.chamasha.lost.and.found.controller.request.ItemRequest;
 import lk.chamasha.lost.and.found.controller.response.ItemResponse;
 import lk.chamasha.lost.and.found.exception.ItemNotFoundException;
 import lk.chamasha.lost.and.found.exception.UserNotFoundException;
+import lk.chamasha.lost.and.found.repository.ItemRepository;
 import lk.chamasha.lost.and.found.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -22,6 +23,7 @@ import java.util.List;
 public class ItemController {
 
     private final ItemService itemService;
+
 
     // 🟢 Multipart support
     @RolesAllowed({"ADMIN","STUDENT"})
