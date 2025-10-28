@@ -22,4 +22,5 @@ public class ItemRequest {
     private String date;
     private boolean emergency;
     private Long userId;
+    private String phoneNumber;
 }

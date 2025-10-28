@@ -37,6 +37,8 @@ public class Item {
 
     private boolean emergency;
 
+    private String phoneNumber;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

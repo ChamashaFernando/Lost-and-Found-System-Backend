@@ -23,4 +23,5 @@ public class ItemResponse {
     private LocalDateTime date;
     private boolean emergency;
     private UserResponse user;
+    private String phoneNumber;
 }
