@@ -83,4 +83,16 @@ public class OneClickFoundReportServiceImpl implements OneClickFoundReportServic
                 .token(null) // set token if applicable
                 .build();
     }
+    @Override
+    public List<OneClickFoundReportResponse> getAllReports() throws ReportNotFoundException {
+        List<OneClickFoundReport> reports = oneClickFoundReportRepository.findAll();
+        if (reports.isEmpty()) {
+            throw new ReportNotFoundException("No found reports available");
+        }
+        return reports.stream()
+                .map(this::mapToResponse)
+                .collect(Collectors.toList());
+    }
+
 }
+

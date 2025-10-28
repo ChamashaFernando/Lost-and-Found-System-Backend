@@ -32,5 +32,13 @@ public class OneClickFoundReportController {
             throws UserNotFoundException, ReportNotFoundException {
         List<OneClickFoundReportResponse> reports = reportService.getReportsByUser(userId);
         return ResponseEntity.ok(reports);
+
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<OneClickFoundReportResponse>> getAllReports() throws ReportNotFoundException {
+        List<OneClickFoundReportResponse> reports = reportService.getAllReports();
+        return ResponseEntity.ok(reports);
+    }
+
 }

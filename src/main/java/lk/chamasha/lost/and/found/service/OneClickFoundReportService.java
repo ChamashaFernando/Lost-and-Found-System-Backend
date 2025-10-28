@@ -10,4 +10,5 @@ import java.util.List;
 public interface OneClickFoundReportService {
     public OneClickFoundReportResponse reportFound(OneClickFoundReportRequest request) throws UserNotFoundException;
     public List<OneClickFoundReportResponse> getReportsByUser(Long userId) throws UserNotFoundException, ReportNotFoundException;
+    public List<OneClickFoundReportResponse> getAllReports() throws ReportNotFoundException;
 }
