@@ -2,6 +2,7 @@ package lk.chamasha.lost.and.found.controller.response;
 
 import lk.chamasha.lost.and.found.controller.response.UserResponse;
 
+import lk.chamasha.lost.and.found.model.ItemStatus;
 import lk.chamasha.lost.and.found.model.NotificationType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,10 +16,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class NotificationResponse {
+//    private Long id;
+//    private NotificationType type;
+//    private String message;
+//    private boolean read;
+//    private LocalDateTime createdAt;
+//    private UserResponse user;
+
     private Long id;
-    private NotificationType type;
+    private String title;
     private String message;
-    private boolean read;
+    private boolean seen;
     private LocalDateTime createdAt;
-    private UserResponse user;
+    private Long itemId; // Optional: link to the item
+    private String itemTitle; //
+    private ItemStatus status;
+    private ItemResponse item;
 }

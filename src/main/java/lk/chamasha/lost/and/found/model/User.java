@@ -78,6 +78,8 @@ package lk.chamasha.lost.and.found.model;//package lk.chamasha.lost.and.found.mo
 //    }
 //}
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -123,8 +125,13 @@ public class User implements UserDetails {
     private Double longitude;
 
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Item> items;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Notification> notifications;
 
     @OneToMany(mappedBy = "user")
     private List<ClaimRequest> claimRequests;
