@@ -13,5 +13,7 @@ public interface UserService {
     public UserResponse login(UserRequest userRequest) throws UserNotFoundException;
     public UserResponse getUserById(Long id)throws UserNotFoundException;
     public List<UserResponse> getAllUsers ();
+    public void updateFcmToken(Long userId, String fcmToken);
+    String getFcmTokenByUserId(Long userId);
 
 }

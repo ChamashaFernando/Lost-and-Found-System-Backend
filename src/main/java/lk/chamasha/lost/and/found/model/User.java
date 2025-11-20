@@ -133,6 +133,10 @@ public class User implements UserDetails {
     @JsonIgnore
     private List<Notification> notifications;
 
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
+
     @OneToMany(mappedBy = "user")
     private List<ClaimRequest> claimRequests;
 

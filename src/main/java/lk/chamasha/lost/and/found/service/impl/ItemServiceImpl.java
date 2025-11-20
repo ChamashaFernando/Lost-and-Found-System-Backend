@@ -1,5 +1,6 @@
 
 
+
 package lk.chamasha.lost.and.found.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -55,10 +57,15 @@ public class ItemServiceImpl implements ItemService {
         // ✅ Upload image to Cloudinary
         String imageUrl = null;
         if (image != null && !image.isEmpty()) {
-            imageUrl = cloudinaryService.uploadImage(image);
+            try {
+                imageUrl = cloudinaryService.uploadImage(image);
+            } catch (Exception e) {
+                System.err.println("❌ Image upload failed");
+                e.printStackTrace();
+            }
         }
 
-        // ✅ Handle date conversion safely
+        // ✅ Handle date safely
         LocalDateTime dateTime;
         if (request.getDate() != null) {
             try {
@@ -80,17 +87,17 @@ public class ItemServiceImpl implements ItemService {
         item.setEmergency(request.isEmergency());
         item.setImageUrl(imageUrl);
         item.setStatus(request.getStatus() != null ? request.getStatus() : ItemStatus.LOST);
-        item.setPhoneNumber(request.getPhoneNumber()); // ✅ added phone number field
+        item.setPhoneNumber(request.getPhoneNumber());
         item.setUser(user);
 
         Item savedItem = itemRepository.save(item);
 
-        // ✅ Only create alerts if this is a lost item
+        // ✅ If lost item → create alerts
         if (savedItem.getStatus() == ItemStatus.LOST) {
             notificationService.createNearbyAlerts(savedItem);
         }
 
-        return mapToResponse(item);
+        return mapToResponse(savedItem);
     }
 
     @Override
@@ -138,7 +145,7 @@ public class ItemServiceImpl implements ItemService {
                 .location(item.getLocation())
                 .date(item.getDate())
                 .emergency(item.isEmergency())
-                .phoneNumber(item.getPhoneNumber()) // ✅ include in response
+                .phoneNumber(item.getPhoneNumber())
                 .user(UserResponse.builder()
                         .id(user.getId())
                         .fullName(user.getFullName())
@@ -162,4 +169,6 @@ public class ItemServiceImpl implements ItemService {
                 .collect(Collectors.toList());
     }
 }
+
+
 

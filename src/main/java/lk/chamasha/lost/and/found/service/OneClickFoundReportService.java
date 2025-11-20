@@ -4,6 +4,7 @@ import lk.chamasha.lost.and.found.controller.request.OneClickFoundReportRequest;
 import lk.chamasha.lost.and.found.controller.response.OneClickFoundReportResponse;
 import lk.chamasha.lost.and.found.exception.ReportNotFoundException;
 import lk.chamasha.lost.and.found.exception.UserNotFoundException;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
